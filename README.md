@@ -21,4 +21,3 @@ npm start
 
 There is a [known issue](https://github.com/meteor-vue/vue-meteor/issues/326) that makes the client endlessly refresh in Meteor 1.8. To prevent this, set the NO_HMR=1 environment variable.
 
-

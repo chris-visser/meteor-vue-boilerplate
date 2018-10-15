@@ -1,14 +1,38 @@
+import { VueSSR } from 'meteor/akryum:vue-ssr';
+
 // import './api/publications';
 
-import Vue from 'vue';
-import { VueSSR } from 'meteor/akryum:vue-ssr';
 import CreateApp from './app';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
-// This will be called each time the app is rendered
+/**
+ * Call asyncData methods on components matched by the route.
+ * This grants the ability for components to hydrate either the store or the local component state
+ * Each asyncData method dispatches a store action and returns a Promise,
+ * which is resolved when the action is complete and store state has been updated.
+ * @param matchedComponents
+ * @param store
+ * @param route
+ * @returns {Promise<any[]>}
+ */
+const callAsyncDataMethods = (matchedComponents, store, route) => {
+  const componentsWithAsyncData = matchedComponents.filter(component => component.asyncData);
+
+  const asyncDataPromises = componentsWithAsyncData.map(component => {
+    return component.asyncData({ store, route });
+  });
+
+  return Promise.all(asyncDataPromises);
+};
+
+/**
+ * Below will be called everytime a page needs to be rendered
+ * @param context
+ * @returns {Promise<any>}
+ */
 VueSSR.createApp = function (context) {
-  const s = isDev && Date.now();
+  const startTime = isDev && Date.now();
 
   return new Promise((resolve, reject) => {
     const { app, router, store } = CreateApp({
@@ -21,49 +45,28 @@ VueSSR.createApp = function (context) {
     // wait until router has resolved possible async hooks
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();
+      const route = router.currentRoute;
 
       // no matched routes
       if (!matchedComponents.length) {
         reject({ code: 404 });
       }
 
-      let js = '';
+      callAsyncDataMethods(matchedComponents, store, route)
+        .then(() => {
 
-      // Call preFetch hooks on components matched by the route.
-      // A preFetch hook dispatches a store action and returns a Promise,
-      // which is resolved when the action is complete and store state has been
-      // updated.
-      // Vuex Store prefetch
-      Promise.all(matchedComponents.map(component => {
-        return component.asyncData && component.asyncData({
-          store,
-          route: router.currentRoute,
-        });
-      })).then(() => {
-      // Apollo prefetch
-      // This will prefetch all the Apollo queries in the whole app
-      //   .then(() => ApolloSSR.prefetchAll(apolloProvider, [App, ...matchedComponents], {
-      //     store,
-      //     route: router.currentRoute,
-      //   })).then(() => {
-        isDev && console.log(`[SSR] Data prefetch: ${Date.now() - s}ms`);
+          if (isDev) {
+            console.log(`[SSR] Data prefetch: ${Date.now() - startTime}ms`);
+          }
 
-        // After all preFetch hooks are resolved, our store is now
-        // filled with the state needed to render the app.
-        // Expose the state on the render context, and let the request handler
-        // inline the state in the HTML response. This allows the client-side
-        // store to pick-up the server-side state without having to duplicate
-        // the initial data fetching on the client.
+          // Extract the resulting state from the store and push it into the window object
+          const js = `window.__INITIAL_STATE__=${JSON.stringify(store.state)};`;
 
-        js += `window.__INITIAL_STATE__=${JSON.stringify(store.state)};`;
-
-        // js += ApolloSSR.exportStates(apolloProvider);
-
-        resolve({
-          app,
-          js,
-        });
-      }).catch(reject);
+          resolve({
+            app,
+            js,
+          });
+        }).catch(reject);
     });
   });
 };
