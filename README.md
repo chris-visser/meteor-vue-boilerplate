@@ -7,7 +7,7 @@ It illustrates how to set up a project with a scalable structure.
 - [TODO] Create contribution guide
 - [TODO] Integrate Meteor's pub/sub functionality in a simple way
 - [TODO] Consider abstracting away the routes.js file like in Nuxt.js
-
+- [TODO] Apply linting and tests
 
 ## Getting Started
 
