@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { injectSupply } from 'vue-supply';
 
-import storeOptions from './store';
+import storeOptions from '../store';
 
 Vue.use(Vuex);
 

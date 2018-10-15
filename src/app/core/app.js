@@ -1,23 +1,20 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 
-import './plugins';
-import './filters';
-import './supply';
+import '../plugins';
+import '../filters';
+import '../supply';
+import '../config';
 
 import createStore from './store';
 import createRouter from './router';
 
 import Root from './Root.vue';
 
-import DefaultLayout from './layouts/DefaultLayout.vue';
-import SecondaryLayout from './layouts/SecondaryLayout.vue';
-
-
-Vue.component('default-layout', DefaultLayout);
-Vue.component('secondary-layout', SecondaryLayout);
-
-
+/**
+ * This function is called on both client and server
+ * @returns {{app, router, store}}
+ */
 function createApp() {
 
   const router = createRouter();
