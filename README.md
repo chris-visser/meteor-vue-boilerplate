@@ -4,10 +4,11 @@ It illustrates how to set up a project with a scalable structure.
 
 - [TODO] Extend explanation about directory structure
 - [TODO] Document how to extend the existing functionality
-- [TODO] Create contribution guide
+- [TODO] Extend contribution guide
 - [TODO] Integrate Meteor's pub/sub functionality in a simple way
 - [TODO] Consider abstracting away the routes.js file like in Nuxt.js
-- [TODO] Apply linting and tests
+- [TODO] Apply tests
+- [TODO] Make part of Meteor by creating a command: `meteor create --vue`?
 
 ## Getting Started
 
