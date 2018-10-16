@@ -16,7 +16,6 @@ import Root from './Root.vue';
  * @returns {{app, router, store}}
  */
 function createApp() {
-
   const router = createRouter();
   const store = createStore();
 

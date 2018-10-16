@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
+    "lint": "eslint . --fix",
+    "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
@@ -23,8 +25,20 @@
     "mainModule": {
       "client": "client.js",
       "server": "server.js"
-    },
-    "testModule": "tests/main.js"
+    }
   },
-  "devDependencies": {}
+  "eslintConfig": {
+    "extends": "@meteorjs/eslint-config-meteor"
+  },
+  "devDependencies": {
+    "@meteorjs/eslint-config-meteor": "^1.0.5",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-meteor": "^5.1.0",
+    "eslint-plugin-react": "^7.11.1"
+  }
 }

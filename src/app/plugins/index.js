@@ -13,7 +13,6 @@ Vue.use(Vuex);
 Vue.use(VueMeteorTracker);
 Vue.config.meteor.freeze = true;
 
-console.log('tracker installed');
 Vue.use(VueSupply);
 
 Vue.use(VueObserveVisibility);

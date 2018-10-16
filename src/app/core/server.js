@@ -19,9 +19,9 @@ const isDev = process.env.NODE_ENV !== 'production';
 const callAsyncDataMethods = (matchedComponents, store, route) => {
   const componentsWithAsyncData = matchedComponents.filter(component => component.asyncData);
 
-  const asyncDataPromises = componentsWithAsyncData.map(component => {
-    return component.asyncData({ store, route });
-  });
+  const asyncDataPromises = componentsWithAsyncData.map(component => (
+    component.asyncData({ store, route })
+  ));
 
   return Promise.all(asyncDataPromises);
 };
@@ -49,13 +49,13 @@ VueSSR.createApp = function (context) {
 
       // no matched routes
       if (!matchedComponents.length) {
-        reject({ code: 404 });
+        reject(new Error('not-found'));
       }
 
       callAsyncDataMethods(matchedComponents, store, route)
         .then(() => {
-
           if (isDev) {
+            /* eslint no-console: off */
             console.log(`[SSR] Data prefetch: ${Date.now() - startTime}ms`);
           }
 
