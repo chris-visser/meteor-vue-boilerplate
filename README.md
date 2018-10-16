@@ -62,3 +62,8 @@ This is where the Vuex store modules are located
 
 ### supply
 vue-supply will help with integrating Meteor's pub/sub system (WIP)
+
+## Contribution
+
+If you found a bug or have a request for a feature, then please open an issue. If you 
+want to contribute then feel free to fork this repo and file a merge request. 
