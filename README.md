@@ -7,7 +7,7 @@ It illustrates how to set up a project with a scalable structure.
 - [TODO] Create contribution guide
 - [TODO] Integrate Meteor's pub/sub functionality in a simple way
 - [TODO] Consider abstracting away the routes.js file like in Nuxt.js
-
+- [TODO] Apply linting and tests
 
 ## Getting Started
 
@@ -22,8 +22,6 @@ Then start the app in development mode:
 ```sh
 npm start
 ```
-
-At first it might seem that there are a lot of files. However, you don't need to touch most of the files located in the ./src/app root.
 
 ### Known issue
 

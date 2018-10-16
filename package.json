@@ -7,6 +7,8 @@
     "start": "cd src && npm start",
     "install": "cd src && npm install",
     "build": "cd src && meteor build --directory ../",
+    "lint": "cd src && npm run lint",
+    "pretest": "cd src && npm run pretest",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
