@@ -3,7 +3,7 @@
     <the-header />
 
     <div class="page">
-      <slot />
+      <slot name="page" />
     </div>
   </div>
 </template>

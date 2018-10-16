@@ -32,19 +32,27 @@ There is a [known issue](https://github.com/meteor-vue/vue-meteor/issues/326) th
 ## App Directory Structure
 
 ### components
-This folder should contain all the vue components
+This folder should contain all the Vue components
 
 ### core
-This folder contains the boilerplate code and does not have to be changed to get your Meteor+Vue app up and running. 
+This folder contains the initialization code that should not have to be changed unless you want to change 
+the way the app loads its core functionality. Examples of this functionality are the router, store, app initialization, 
+SSR and asyncData calls.
 
 ### filters
-This is where you put functionality that is shared across multiple components.
+This is where you put functionality that is shared across multiple components. An example would be a standardized 
+way to format dates.
 
 ### layouts
-This is where you add or modify the app's main layout(s)
+Multiple layouts are supported. This is where you add or modify them. If no layout is configured for a page, 
+the 'default' layout is loaded. The intention is that you use [Vue Slots](https://vuejs.org/v2/guide/components-slots.html) 
+to determine where the page is loaded. 
+
+Simply put `<slot />` on your layout where you want each page to be rendered.
 
 ### pages
-Pages are rendered on designated area's in the layouts based on the routes configuration located in the routes.js file
+Pages are configured in the routes.js file and are loaded when its route matches. The page is rendered on a 
+designated spot within the configured layout. 
 
 ### plugins
 Put all VueJS plugins here
