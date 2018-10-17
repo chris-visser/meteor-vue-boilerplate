@@ -35,15 +35,13 @@ VueSSR.createApp = function (context) {
   const startTime = isDev && Date.now();
 
   return new Promise((resolve, reject) => {
-    const { app, router, store } = createApp({
-      ssr: true,
-    });
+    const { app, router, store } = createApp({ ssr: true });
 
     // set router's location
     router.push(context.url);
 
     // wait until router has resolved possible async hooks
-    router.onReady(() => {
+    router.onReady(async () => {
       const matchedComponents = router.getMatchedComponents();
       const route = router.currentRoute;
 
@@ -52,21 +50,17 @@ VueSSR.createApp = function (context) {
         reject(new Error('not-found'));
       }
 
-      callAsyncDataMethods(matchedComponents, store, route)
-        .then(() => {
-          if (isDev) {
-            /* eslint no-console: off */
-            console.log(`[SSR] Data prefetch: ${Date.now() - startTime}ms`);
-          }
+      await callAsyncDataMethods(matchedComponents, store, route).catch(reject);
 
-          // Extract the resulting state from the store and push it into the window object
-          const js = `window.__INITIAL_STATE__=${JSON.stringify(store.state)};`;
+      if (isDev) {
+        /* eslint no-console: off */
+        console.log(`[SSR] Data prefetch: ${Date.now() - startTime}ms`);
+      }
 
-          resolve({
-            app,
-            js,
-          });
-        }).catch(reject);
+      // Extract the resulting state from the store and push it into the window object
+      const js = `window.__INITIAL_STATE__=${JSON.stringify(store.state)};`;
+
+      resolve({ app, js });
     });
   });
 };

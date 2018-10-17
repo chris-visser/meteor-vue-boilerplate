@@ -13,9 +13,11 @@ import Root from './Root.vue';
 
 /**
  * This function is called on both client and server
+ * @params context
  * @returns {{app, router, store}}
  */
-export default function createApp() {
+/* eslint no-unused-vars: off */
+export default function createApp(context = { ssr: false }) {
   const router = createRouter();
   const store = createStore();
 
