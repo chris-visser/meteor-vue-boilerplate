@@ -15,7 +15,7 @@ import Root from './Root.vue';
  * This function is called on both client and server
  * @returns {{app, router, store}}
  */
-function createApp() {
+export default function createApp() {
   const router = createRouter();
   const store = createStore();
 
@@ -36,5 +36,3 @@ function createApp() {
     store,
   };
 }
-
-export default createApp;

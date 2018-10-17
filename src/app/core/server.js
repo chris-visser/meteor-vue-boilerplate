@@ -2,7 +2,7 @@ import { VueSSR } from 'meteor/akryum:vue-ssr';
 
 // import './api/publications';
 
-import CreateApp from './app';
+import createApp from './app';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -35,7 +35,7 @@ VueSSR.createApp = function (context) {
   const startTime = isDev && Date.now();
 
   return new Promise((resolve, reject) => {
-    const { app, router, store } = CreateApp({
+    const { app, router, store } = createApp({
       ssr: true,
     });
 
