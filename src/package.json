@@ -14,9 +14,10 @@
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.22.2",
     "vue": "^2.5.17",
-    "vue-meteor-tracker": "^1.2.0",
+    "vue-meteor-tracker": "^2.0.0-beta.4",
     "vue-observe-visibility": "^0.4.3",
     "vue-router": "^3.0.1",
+    "vue-router-sync": "^0.1.0",
     "vue-supply": "^0.3.0",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
