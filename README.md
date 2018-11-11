@@ -1,14 +1,5 @@
 This boilerplate is meant to help people get started with Vue as the frontend library for Meteor. 
-It illustrates how to set up a project with a scalable structure.
-
-
-- [TODO] Extend explanation about directory structure
-- [TODO] Document how to extend the existing functionality
-- [TODO] Extend contribution guide
-- [TODO] Integrate Meteor's pub/sub functionality in a simple way
-- [TODO] Consider abstracting away the routes.js file like in Nuxt.js
-- [TODO] Apply tests
-- [TODO] Make part of Meteor by creating a command: `meteor create --vue`?
+It illustrates how to set up a project with a scalable structure. 
 
 ## Getting Started
 
@@ -66,3 +57,4 @@ vue-supply will help with integrating Meteor's pub/sub system (WIP)
 
 If you found a bug or have a request for a feature, then please open an issue. If you 
 want to contribute then feel free to fork this repo and file a merge request. 
+
