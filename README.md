@@ -17,7 +17,17 @@ npm start
 
 ### Known issue
 
-There is a [known issue](https://github.com/meteor-vue/vue-meteor/issues/326) that makes the client endlessly refresh in Meteor 1.8. To prevent this, set the NO_HMR=1 environment variable.
+There are some issues related to vue-ssr and therefore I've added the fixed versions 
+of the affected packages into this repo until the issues are resolved. 
+
+https://github.com/meteor-vue/vue-meteor/pull/343
+
+As soon as my pull request is accept, just remove the `./packages` folder and run the below command:
+
+```bash
+meteor update --all-packages
+```
+ 
 
 ## App Directory Structure
 
